@@ -1,1 +1,3 @@
-console.log("link is working")
+$("#currentDay").text(moment().format("Do MMMM YYYY"))
+
+
