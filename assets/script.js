@@ -26,13 +26,12 @@ function hourHighlight(){
 
 // Function to run hourHighlight every ten seconds so it updates as time goes on
 
-function displayMessage() {
-  
+function checkTime() {  
     var interval = setInterval(function () {
         hourHighlight();
     }, 10000);
   }
-displayMessage();
+checkTime();
 
 // This function runs through the hour rows and checks if there is anything saved for them. If there is then render it to page. If not then clear the box of text
 function planRender(){
