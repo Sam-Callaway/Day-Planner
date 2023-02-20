@@ -60,6 +60,10 @@ textarea {
   color: white;
 }
 
+input {
+  font-size:20px;
+}
+
 .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;

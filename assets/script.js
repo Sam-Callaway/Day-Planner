@@ -24,6 +24,16 @@ function hourHighlight(){
     }
 }
 
+// Function to run hourHighlight every ten seconds so it updates as time goes on
+
+function displayMessage() {
+  
+    var interval = setInterval(function () {
+        hourHighlight();
+    }, 10000);
+  }
+displayMessage();
+
 // This function runs through the hour rows and checks if there is anything saved for them. If there is then render it to page. If not then clear the box of text
 function planRender(){
     for (i=0;i<15;i++){
@@ -35,7 +45,6 @@ function planRender(){
         }
         else 
         {
-            console.log(localStorage.getItem(currentHour))
             currentInput.val(localStorage.getItem(currentHour))
         }
     }    
@@ -43,18 +52,26 @@ function planRender(){
 
 // Button to clear localStorage
 $("#resetButton").on('click',function (){
-    localStorage.clear();
-    planRender();
+    clearAll();
 })
+
+// Clearing function
+function clearAll(){
+    localStorage.clear();
+    localStorage.setItem("day",moment().format("Do MMMM YYYY"))
+    planRender();
+}
 
 
 // Button to save input
 $(scheduleGrid.children().children('button')).on('click', function () {
     // Find out what the input text and the hour it's in are
+
     var currentBtn = $(this);
     var current = currentBtn.parent();
     var currentHour = current.children().first().text();
     var currentInput = current.children().eq(1).val();
+
     // Write that to local storage
     localStorage.setItem(currentHour,currentInput);
 
@@ -64,6 +81,16 @@ $(scheduleGrid.children().children('button')).on('click', function () {
 })
 
 // This function clears localStorage if the user opens the planner on a new day
+function newDay(){
+    if(localStorage.getItem("day") === null){
+        localStorage.setItem("day",moment().format("Do MMMM YYYY"))
+    }
+    else
+    if (localStorage.getItem("day") < moment().format("Do MMMM YYYY")){
+        clearAll();
+    }
+}
 
+newDay();
 hourHighlight();
 planRender();
