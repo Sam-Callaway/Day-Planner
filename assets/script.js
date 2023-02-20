@@ -11,14 +11,20 @@ function hourHighlight(){
         var nowHour = moment().format('kk')
         if(hourRowHour < nowHour){
             hourRow.children().eq(1).addClass('past')
+            hourRow.children().eq(1).removeClass('present')
+            hourRow.children().eq(1).removeClass('future')
         }
         else
         if (hourRowHour === nowHour){
             hourRow.children().eq(1).addClass('present')
+            hourRow.children().eq(1).removeClass('past')
+            hourRow.children().eq(1).removeClass('future')
         }
         else
         {
             hourRow.children().eq(1).addClass('future')
+            hourRow.children().eq(1).removeClass('past')
+            hourRow.children().eq(1).removeClass('present')
         }
     
     }
